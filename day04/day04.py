@@ -1,11 +1,21 @@
 # https://adventofcode.com/2024/day/4
 
+
 def q1(lines):
     count = 0
     for y in range(len(lines)):
         for x in range(len(lines[0])):
-            for dx, dy in [(0, 1), (0, -1), (1, 0), (-1, 0), (1, 1), (1, -1), (-1, 1), (-1, -1)]:
-                if isWord(lines, 'XMAS', x, y, dx, dy):
+            for dx, dy in [
+                (0, 1),
+                (0, -1),
+                (1, 0),
+                (-1, 0),
+                (1, 1),
+                (1, -1),
+                (-1, 1),
+                (-1, -1),
+            ]:
+                if isWord(lines, "XMAS", x, y, dx, dy):
                     count = count + 1
     return count
 
@@ -24,10 +34,12 @@ def q2(lines):
     count = 0
     for y in range(len(lines)):
         for x in range(len(lines[0])):
+            if lines[y][x] != "A":
+                continue
             localCount = 0
             for dx, dy in ((-1, -1), (1, -1), (1, 1), (-1, 1)):
-                if isWord(lines, 'MAS', x+dx, y+dy, -dx, -dy):
+                if isWord(lines, "MAS", x + dx, y + dy, -dx, -dy):
                     localCount = localCount + 1
-            if localCount > 1:
+            if localCount == 2:
                 count = count + 1
     return count
