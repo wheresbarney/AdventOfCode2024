@@ -1,6 +1,6 @@
 # https://adventofcode.com/2024/day/5
 
-from functools import cmp_to_key, partial
+from functools import cmp_to_key
 
 def q1(lines):
     orderings = [list(map(int, l.split("|"))) for l in lines if "|" in l]
@@ -33,13 +33,7 @@ def q2(lines):
     for s in sections:
         if is_ordered(s, orderings):
             continue
-        o = sorted(s, key=cmp_to_key(partial(key_func, orderings)))
+        o = sorted(s, key=cmp_to_key(lambda l, r: 1 if [r, l] in orderings else -1))
         # print(f"{s} => {o}, middle is {o[int(len(o)/2)]}")
         sum_middles += o[int(len(o)/2)]
     return sum_middles
-
-
-def key_func(orderings, l, r):
-    if [r, l] in orderings:
-        return 1
-    return -1
