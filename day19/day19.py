@@ -5,7 +5,7 @@ from functools import lru_cache
 
 def q1(lines):
     towels = frozenset({t.strip() for t in lines[0].split(",")})
-    patterns = [l for l in lines[2:]]
+    patterns = lines[2:]
 
     def possible(pattern):
         for towel in towels:
@@ -21,7 +21,7 @@ def q1(lines):
 
 def q2(lines):
     towels = frozenset({t.strip() for t in lines[0].split(",")})
-    patterns = [l for l in lines[2:]]
+    patterns = lines[2:]
 
     @lru_cache
     def permutations(pattern):
